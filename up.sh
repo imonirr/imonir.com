@@ -2,11 +2,13 @@
 
 # docker network create imonir
 
-docker-compose -f docker-compose.yml up -d
+docker-compose up -d
 
+echo "Starting Frontend"
 cd ../imonir.front/
-docker-compose -f docker-compose.yml up -d
+source ./up.sh
 
-cd ../imonir.back/ 
-docker-compose -f docker-compose.yml up -d
+echo "Starting Backend"
+cd ../imonir.back/
+source ./up.sh
 

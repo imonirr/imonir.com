@@ -1,11 +1,12 @@
 #! /bin/bash
 
-docker-compose -f docker-compose.yml down
+docker-compose down
 
-
+echo "Stopping Frontend"
 cd ../imonir.front/
-docker-compose -f docker-compose.yml down
+source ./down.sh
 
-cd ../imonir.back/ 
-docker-compose -f docker-compose.yml down
+echo "Stoping Backend"
+cd ../imonir.back/
+source ./down.sh
 
