@@ -11,9 +11,12 @@ services:
   nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
-      - './certs/letsencrypt/:/etc/nginx/certs:rw'
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
-    volumes_from:
-      - nginx-proxy
+
+      - './certs/letsencrypt/:/etc/nginx/certs:rw'
+      - '/etc/nginx/vhost.d'
+      - '/usr/share/nginx/html'
     depends_on:
       - nginx-proxy
+
+
