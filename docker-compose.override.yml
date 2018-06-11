@@ -1,6 +1,7 @@
-version: '3'
+version: "3"
 
 services:
   nginx-proxy:
     volumes:
-      - './certs/local/:/etc/nginx/certs:ro'
+      - "./certs/local:/etc/nginx/certs:ro"
+

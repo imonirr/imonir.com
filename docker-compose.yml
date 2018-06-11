@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx-proxy:
@@ -9,7 +9,8 @@ services:
     networks:
       - imonir
     volumes:
-      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+
 networks:
   imonir:
     external: true
