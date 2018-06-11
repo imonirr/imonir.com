@@ -2,17 +2,10 @@ version: '3'
 
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - imonir
     volumes:
       # - '/etc/nginx/vhost.d'
       # - '/usr/share/nginx/html'
-      - './certs/local/:/etc/nginx/certs:ro'
-      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      # - './certs/local/:/etc/nginx/certs:ro'
     # labels:
     #   - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
   # nginx-proxy-companion:
@@ -24,8 +17,3 @@ services:
   #     - nginx-proxy
   #   depends_on:
   #     - nginx-proxy
-
-networks:
-  imonir:
-    external: true
-
