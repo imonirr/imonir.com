@@ -1,8 +1,7 @@
 #! /bin/bash
 
 # docker network create imonir
-
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d
 
 echo "Starting Frontend"
 cd ../imonir.front/
