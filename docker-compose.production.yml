@@ -3,7 +3,7 @@ version: '3'
 services:
   nginx:
     labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
     volumes:
       - ./certs/letsencrypt:/etc/nginx/certs:ro
 
