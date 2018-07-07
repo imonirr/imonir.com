@@ -1,7 +1,2 @@
-certs/letsencrypt/*
-certs/local/*
-conf.d/*
-html/*
-vhost.d/*
 up.sh
 down.sh
