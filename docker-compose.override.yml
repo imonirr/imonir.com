@@ -1,7 +1,11 @@
 version: "3"
 
 services:
-  nginx-proxy:
+  nginx:
     volumes:
-      - "./certs/local:/etc/nginx/certs:ro"
+      - ./certs/local:/etc/nginx/certs:ro
+
+  nginx-gen:
+    volumes:
+      - ./certs/local:/etc/nginx/certs:ro
 

@@ -1,22 +1,27 @@
 version: '3'
 
 services:
-  nginx-proxy:
-    volumes:
-      - './certs/letsencrypt/:/etc/nginx/certs:ro'
-      - '/etc/nginx/vhost.d'
-      - '/usr/share/nginx/html'
+  nginx:
     labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=jwilder/nginx-proxy"
-  nginx-proxy-companion:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - ./certs/letsencrypt:/etc/nginx/certs:ro
 
-      - './certs/letsencrypt/:/etc/nginx/certs:rw'
-      - '/etc/nginx/vhost.d'
-      - '/usr/share/nginx/html'
-    depends_on:
-      - nginx-proxy
+  nginx-gen:
+    volumes:
+      - ./certs/letsencrypt:/etc/nginx/certs:ro
 
-
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    restart: unless-stopped
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - ./certs/letsencrypt:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      NGINX_DOCKER_GEN_CONTAINER: "nginx-gen"
+      NGINX_PROXY_CONTAINER: "nginx"
+      # DEBUG: "true"
