@@ -5,9 +5,9 @@ docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d
 
 echo "Starting Frontend"
 cd ../imonir.front/
-source ./deploy.sh
+source ./siteup.sh
 
 echo "Starting Backend"
 cd ../imonir.back/
-source ./deploy.sh
+source ./siteup.sh
 
