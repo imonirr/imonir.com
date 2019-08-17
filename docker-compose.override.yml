@@ -1,11 +1,5 @@
-version: "3"
+version: '3.5'
 
 services:
-  nginx:
-    volumes:
-      - ./certs/local:/etc/nginx/certs:ro
-
-  nginx-gen:
-    volumes:
-      - ./certs/local:/etc/nginx/certs:ro
-
+  imonir_front:
+    restart: 'no'

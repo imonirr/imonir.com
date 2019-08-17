@@ -1,32 +1,24 @@
-version: '3'
+version: '3.5'
 
 services:
-  nginx:
-    image: nginx
-    container_name: nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
+  imonir_front:
+    container_name: imonir_front
+    restart: 'unless-stopped'
+    build: 
+      context: frontend
+      dockerfile: Dockerfile
+    expose:
+      - 4100
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./vhost.d:/etc/nginx/vhost.d
-      - ./html:/usr/share/nginx/html
+     - ./frontend:/home/app
+     - imonir_front_node_modules:/home/app/node_modules
+    env_file:
+      - .env.frontend
 
-  nginx-gen:
-    image: jwilder/docker-gen
-    container_name: nginx-gen
-    restart: unless-stopped
-    command: -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
-    volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./vhost.d:/etc/nginx/vhost.d
-      - ./html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+volumes:
+  imonir_front_node_modules:
 
 networks:
   default:
     external:
-      name: imonir
-
+      name: fullstack
