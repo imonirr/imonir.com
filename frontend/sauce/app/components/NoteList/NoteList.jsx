@@ -28,12 +28,12 @@ const NoteTime = styled.span`
   // color: #001f3f;
 
 class NoteList extends PureComponent {
-  componentWillMount() {
-    if (!this.props.loading && this.props.notes.length === 0) {
-      console.warn('note not fetched');
-      this.props.fetchNoteList();
-    }
-  }
+  // componentWillMount() {
+  //   if (!this.props.loading && this.props.notes.length === 0) {
+  //     console.warn('note not fetched');
+  //     this.props.fetchNoteList();
+  //   }
+  // }
   render() {
     return (
       <Fragment>

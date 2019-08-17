@@ -1,5 +1,8 @@
 const path = require('path');
 
+require('dotenv').config()
+
+
 const PATHS = {
   root: path.join(__dirname),
   sauce: path.join(__dirname, '../sauce'),
@@ -37,3 +40,7 @@ exports.PATHS = PATHS;
 exports.API_URL = API_URL;
 exports.API_URL_BACK = API_URL_BACK;
 exports.APP_URL = APP_URL;
+
+exports.API_URL_FROM_BROWSER = process.env.API_URL_FROM_BROWSER;
+exports.API_URL_FROM_SERVER = process.env.API_URL_FROM_SERVER + ':8100' ;
+

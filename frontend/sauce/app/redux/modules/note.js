@@ -10,7 +10,6 @@ import {
   getToken,
 } from 'redux/modules/auth';
 
-
 // INITIALSTATE
 const initialState = {
   loading: false,
@@ -19,6 +18,11 @@ const initialState = {
 
   slugToId: {},
 };
+
+
+// const url = process.browser ? `${API_URL_FROM_BROWSER}v1/notes/${slug}` : `${API_URL_FROM_SERVER}v1/notes/${slug}`;
+// console.log('browser url: ' + API_URL_FROM_BROWSER);
+// console.log('server url: ' + API_URL_FROM_SERVER);
 
 // SELECTORS
 export const sampleNote = () => '';
@@ -113,7 +117,7 @@ export const fetchNote = slug =>
 
     const req = {
       [API_REQUEST]: {
-        url: process.browser ? `${API}v1/notes/${slug}` : `${API_BACK}v1/notes/${slug}`,
+        url: process.browser ? `${API_URL_FROM_BROWSER}v1/notes/${slug}` : `${API_URL_FROM_SERVER}v1/notes/${slug}`,
         config: {
           method: 'GET',
         },
@@ -145,7 +149,7 @@ export const fetchNoteList = () =>
 
     const req = {
       [API_REQUEST]: {
-        url: process.browser ? `${API}v1/notes/list` : `${API_BACK}v1/notes/list`,
+        url: process.browser ? `${API_URL_FROM_BROWSER}v1/notes/list` : `${API_URL_FROM_SERVER}v1/notes/list`,
         config: {
           method: 'GET',
         },

@@ -4,9 +4,16 @@ const compression = require('compression');
 const next = require('next');
 const { parse } = require('url');
 
+
+require('dotenv').config()
+// const dotenv = require('dotenv');
+// const envFile = '../.env';
+// dotenv.load({ path: envFile });
+
 const dev = process.env.NODE_ENV !== 'production';
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-const PORT = process.env.VIRTUAL_PORT;
+const PORT = process.env.PORT;
+// console.log(JSON.stringify(process.env));
 
 const app = next({ dev });
 const handle = app.getRequestHandler(app);

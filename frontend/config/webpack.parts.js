@@ -14,7 +14,12 @@ const {
   API_URL,
   API_URL_BACK,
   APP_URL,
+  API_URL_FROM_BROWSER,
+  API_URL_FROM_SERVER,
 } = require('./constants');
+
+console.log('browser url: ' + API_URL_FROM_BROWSER);
+console.log('server url: ' + API_URL_FROM_SERVER);
 
 exports.setGlobalVariables = (target, override = {}) => ({
   plugins: [
@@ -27,6 +32,8 @@ exports.setGlobalVariables = (target, override = {}) => ({
       API: JSON.stringify(API_URL[target]),
       API_BACK: JSON.stringify(API_URL_BACK[target]),
       APP_URL: JSON.stringify(APP_URL[target]),
+      API_URL_FROM_BROWSER: API_URL_FROM_BROWSER,
+      API_URL_FROM_SERVER: API_URL_FROM_SERVER,
     }, override)),
   ],
 });

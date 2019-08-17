@@ -3,3 +3,6 @@ version: '3.5'
 services:
   imonir_front:
     restart: 'no'
+
+  imonir_back:
+    restart: 'no'

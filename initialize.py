@@ -3,8 +3,11 @@
 #  from subprocess import call
 from pathlib import Path
 #  import sys
-#  import random
-#  import string
+import random
+import string
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 PROJECT_NAME = 'imonir'
@@ -20,41 +23,62 @@ notDevelopment = ENVIRONMENT != 'development'
 nodeEnv = ENVIRONMENT
 
 
-# back env vars
-virtualHostBack = 'api.imonir.com' if notDevelopment  else 'local.api.imonir.com'
-virtualPortBack = 8100
-
 # front env vars
 virtualHostFront = 'www.imonir.com' if notDevelopment  else 'local.www.imonir.com'
 virtualPortFront = 4100
 
-apiUrl = virtualHostBack
-apiUrlFromServer = 'imonirback'
 
+# back env vars
+virtualHostBack = 'api.imonir.com' if notDevelopment  else 'local.api.imonir.com'
+virtualPortBack = 8100
+jwtSecret = id_generator(32)
+corsOrigin = virtualHostFront
+#  fbClientId = process.env.FACEBOOK_CLIENTID,
+#  fbClientSecret = process.env.FACEBOOK_CLIENTSECRET,
+
+apiUrl = virtualHostBack
+apiUrlFromServer = 'imonir_back'
 
 
 # front env file
-envFront = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
+envContainerFront = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
       f"VIRTUAL_HOST={virtualHostFront}\n"\
-      f"VIRTUAL_PORT={virtualPortFront}\n\n"\
-      f"API_URL={apiUrl}\n"\
-      f"API_URL_FROM_SERVER={apiUrlFromServer}"
+      f"VIRTUAL_PORT={virtualPortFront}"
 
 # back env file
-envBack = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
+envContainerBack = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
       f"VIRTUAL_HOST={virtualHostBack}\n"\
       f"VIRTUAL_PORT={virtualPortBack}"
 
 
+envFrontend = f"NODE_ENV={nodeEnv}\n\n"\
+      f"PORT={virtualPortFront}\n"\
+      f"API_URL={apiUrl}:{virtualPortBack}\n"\
+      f"API_URL_FROM_SERVER={apiUrlFromServer}"
+
+envBackend = f"NODE_ENV={nodeEnv}\n\n"\
+      f"PORT={virtualPortBack}\n"\
+      f"JWT_SECRET={jwtSecret}\n"\
+      f"CORS_ORIGIN={corsOrigin}\n"
+
 
 # WRITE TO ENV FILES
-with open('./.env.front', 'w+') as f:
-    print('Creating ./.env.front')
-    f.write(envFront)
+with open('./.env.frontend', 'w+') as f:
+    print('Creating ./.env.frontend')
+    f.write(envContainerFront)
 
-with open('./.env.back', 'w+') as f:
-    print('Creating ./.env.back')
-    f.write(envBack)
+with open('./.env.backend', 'w+') as f:
+    print('Creating ./.env.backend')
+    f.write(envContainerBack)
+
+# WRITE TO APP ENV FILES
+with open('./frontend/.env', 'w+') as f:
+    print('Creating ./frontend/.env')
+    f.write(envFrontend)
+
+with open('./backend/.env', 'w+') as f:
+    print('Creating ./backend/.env')
+    f.write(envBackend)
 
 
 print("\n")

@@ -6,7 +6,6 @@ services:
     restart: 'unless-stopped'
     build: 
       context: frontend
-      dockerfile: Dockerfile
     expose:
       - 4100
     volumes:
@@ -15,8 +14,42 @@ services:
     env_file:
       - .env.frontend
 
+    links:
+      - imonir_back
+
+    external_links:
+      - rsyslog
+    logging:
+      driver: syslog
+      options:
+        tag: "imonir_front"
+        syslog-address: "tcp://localhost:5555"
+
+
+  imonir_back:
+    container_name: imonir_back
+    restart: 'unless-stopped'
+    build: 
+      context: backend
+    expose:
+      - 8100
+    volumes:
+     - ./backend:/home/app
+     - imonir_back_node_modules:/home/app/node_modules
+    env_file:
+      - .env.backend
+
+    external_links:
+      - rsyslog
+    logging:
+      driver: syslog
+      options:
+        tag: "imonir_back"
+        syslog-address: "tcp://localhost:5555"
+
 volumes:
   imonir_front_node_modules:
+  imonir_back_node_modules:
 
 networks:
   default:
