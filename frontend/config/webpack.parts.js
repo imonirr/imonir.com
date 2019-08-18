@@ -32,8 +32,8 @@ exports.setGlobalVariables = (target, override = {}) => ({
       API: JSON.stringify(API_URL[target]),
       API_BACK: JSON.stringify(API_URL_BACK[target]),
       APP_URL: JSON.stringify(APP_URL[target]),
-      API_URL_FROM_BROWSER: API_URL_FROM_BROWSER,
-      API_URL_FROM_SERVER: API_URL_FROM_SERVER,
+      API_URL_FROM_BROWSER: JSON.stringify(API_URL_FROM_BROWSER),
+      API_URL_FROM_SERVER: JSON.stringify(API_URL_FROM_SERVER),
     }, override)),
   ],
 });

@@ -37,6 +37,7 @@ class Index extends PureComponent {
     const notes = noteList(state);
 
     if (notes.length === 0) {
+      return ctx.reduxStore.dispatch(fetchNoteList());
       // if (ctx.isServer) {
       //   // console.log(ctx.query);
       //   return ctx.reduxStore.dispatch(fetchNoteList());
@@ -44,8 +45,8 @@ class Index extends PureComponent {
 
       // return ctx.reduxStore.dispatch(fetchNoteList());
     }
-      return {};
 
+    return {};
   }
 
   render() {

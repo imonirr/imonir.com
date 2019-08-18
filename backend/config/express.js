@@ -51,6 +51,8 @@ server.use(
       const whitelist = corsOrigin
         ? corsOrigin.split(',')
         : [];
+        console.log('CORS ORIGIN');
+    console.log(whitelist);
       cb(null, whitelist.includes(origin));
     },
     methods: 'GET, POST, PATCH, DELETE',

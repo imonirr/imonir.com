@@ -113,7 +113,7 @@ export const fetchNote = slug =>
 
     const req = {
       [API_REQUEST]: {
-        url: process.browser ? '${API_URL_FROM_BROWSER}' + `v1/notes/${slug}` : `${API_URL_FROM_SERVER}v1/notes/${slug}`,
+        // url: process.browser ? '${API_URL_FROM_BROWSER}' + `v1/notes/${slug}` : `${API_URL_FROM_SERVER}v1/notes/${slug}`,
         config: {
           method: 'GET',
         },
@@ -137,6 +137,8 @@ export const fetchNote = slug =>
           }),
       );
   };
+
+
 export const fetchNoteList = () =>
   (dispatch, getState) => {
     dispatch({ type: GET_LIST });
@@ -145,7 +147,7 @@ export const fetchNoteList = () =>
 
     const req = {
       [API_REQUEST]: {
-        url: process.browser ? `${API_URL_FROM_BROWSER}v1/notes/list` : `${API_URL_FROM_SERVER}v1/notes/list`,
+        url: process.browser ? `${API_URL_FROM_BROWSER}/v1/notes/list` : `${API_URL_FROM_SERVER}/v1/notes/list`,
         config: {
           method: 'GET',
         },
