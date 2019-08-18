@@ -15,9 +15,11 @@ ENVIRONMENT = Path('.env.run').read_text().rstrip()
 
 print(f"Environment: {ENVIRONMENT}")
 notDevelopment = ENVIRONMENT != 'development'
+isProduction = ENVIRONMENT != 'production'
 
 
 # CONTAINERS
+containerBack = 'imonir_back'
 
 # env vars
 nodeEnv = ENVIRONMENT
@@ -32,12 +34,12 @@ virtualPortFront = 4100
 virtualHostBack = 'api.imonir.com' if notDevelopment  else 'local.api.imonir.com'
 virtualPortBack = 8100
 jwtSecret = id_generator(32)
-corsOrigin = virtualHostFront
+corsOrigin = f"https://{virtualHostFront}"
 #  fbClientId = process.env.FACEBOOK_CLIENTID,
 #  fbClientSecret = process.env.FACEBOOK_CLIENTSECRET,
 
-apiUrl = virtualHostBack
-apiUrlFromServer = 'imonir_back'
+apiUrlFromBrowser = virtualHostBack
+apiUrlFromServer = containerBack
 
 
 # front env file
@@ -45,16 +47,26 @@ envContainerFront = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
       f"VIRTUAL_HOST={virtualHostFront}\n"\
       f"VIRTUAL_PORT={virtualPortFront}"
 
+if isProduction:
+    envContainerFront += f"\n"\
+        f"LETSENCRYPT_HOST={virtualHostFront}\n"\
+        f"LETSENCRYPT_EMAIL=email\n"
+
 # back env file
 envContainerBack = f"COMPOSE_PROJECT_NAME={PROJECT_NAME}\n\n"\
       f"VIRTUAL_HOST={virtualHostBack}\n"\
       f"VIRTUAL_PORT={virtualPortBack}"
 
+if isProduction:
+    envContainerBack += f"\n"\
+        f"LETSENCRYPT_HOST={virtualHostBack}\n"\
+        f"LETSENCRYPT_EMAIL=email\n"
+
 
 envFrontend = f"NODE_ENV={nodeEnv}\n\n"\
       f"PORT={virtualPortFront}\n"\
-      f"API_URL={apiUrl}:{virtualPortBack}\n"\
-      f"API_URL_FROM_SERVER={apiUrlFromServer}"
+      f"API_URL_FROM_BROWSER=https://{apiUrlFromBrowser}\n"\
+      f"API_URL_FROM_SERVER=http://{apiUrlFromServer}"
 
 envBackend = f"NODE_ENV={nodeEnv}\n\n"\
       f"PORT={virtualPortBack}\n"\
