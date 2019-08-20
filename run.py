@@ -12,7 +12,7 @@ ENVIRONMENT = Path('.env.run').read_text().rstrip()
 
 CONTAINER = 'imonir_front' if len(sys.argv) == 2 else f"imonir_{sys.argv[2]}"
 
-COMPOSE_FILES = ' -f docker-compose.yml -f docker-compose.production.yml ' if ENVIRONMENT == 'production' \
+COMPOSE_FILES = ' -f docker-compose.yml ' if ENVIRONMENT == 'production' \
     else ' -f docker-compose.yml -f docker-compose.override.yml '
 
 print('ENVIRONMENT: ' + ENVIRONMENT)
