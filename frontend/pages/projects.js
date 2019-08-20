@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react';
-import withRedux from 'next-redux-wrapper';
 
-import create from 'redux/create';
+// import create from 'redux/create';
 import WhatIDo from 'WhatIDo/WhatIDo';
 import App from 'App/App';
-import initialize from 'utils/initialize';
+// import initialize from 'utils/initialize';
 
 class WhatIDoPage extends PureComponent {
-  static getInitialProps(ctx) {
-    initialize(ctx);
-  }
+  // static getInitialProps(ctx) {
+  //   initialize(ctx);
+  // }
   render() {
     return (
       <App>
@@ -20,4 +19,4 @@ class WhatIDoPage extends PureComponent {
 }
 
 
-export default withRedux(create)(WhatIDoPage);
+export default WhatIDoPage;

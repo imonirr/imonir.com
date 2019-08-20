@@ -28,7 +28,7 @@ class Nav extends PureComponent {
             passHref
             href="/"
           >
-            <Navigation>Notes</Navigation>
+            <Navigation>iMonir</Navigation>
           </Link>
         </NavItem>
 

@@ -53,7 +53,7 @@ class ProjectList extends PureComponent {
       <Fragment>
         {
           projects.map(project => (
-            <Project key={project.key} wrap="wrap" my={1} p={2}>
+            <Project key={project.key} flexWrap="wrap" my={1} p={2}>
               <Column2>
                 <ProjectTitle>
                   <StyledLink href={project.title.link}>{project.title.text}</StyledLink>
@@ -72,7 +72,7 @@ class ProjectList extends PureComponent {
                 }
                 <p>{project.title.time}</p>
               </Column2>
-              <Column2 justify="flex-end">
+              <Column2 justifyContent="flex-end">
                 <Pic src={project.image} />
               </Column2>
               <Column py={2}>{project.description}</Column>

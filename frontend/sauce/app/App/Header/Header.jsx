@@ -18,16 +18,16 @@ class Header extends PureComponent {
     return (
       <HeaderTag>
         <HeaderWrap>
-          <Row justify="flex-end">
+          <Row justifyContent="flex-end">
             <SocialNav />
           </Row>
-          <ContactRow justify="flex-end">
+          <ContactRow justifyContent="flex-end">
             <div>
               <Email />
               <Phone />
             </div>
           </ContactRow>
-          <Row justify="flex-start">
+          <Row justifyContent="flex-start">
             <Nav />
           </Row>
         </HeaderWrap>
