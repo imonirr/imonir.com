@@ -72,7 +72,7 @@ class ProjectList extends PureComponent {
                 }
                 <p>{project.title.time}</p>
               </Column2>
-              <Column2 justifyContent="flex-end">
+              <Column2 justify="flex-end">
                 <Pic src={project.image} />
               </Column2>
               <Column py={2}>{project.description}</Column>
@@ -92,7 +92,7 @@ class ProjectList extends PureComponent {
         }
         {
           !this.state.showNotSoRecent && (
-            <Row justify="center" my={4}>
+            <Row justifyContent="center" my={4}>
               <ClearButton onClick={this.viewOlderProjects}>Not So Recent work</ClearButton>
               <DownArrow onClick={this.viewOlderProjects} alt="See More" src="/static/images/down_arrow.png" />
             </Row>
