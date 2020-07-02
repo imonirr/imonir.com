@@ -25,6 +25,7 @@ module.exports = {
   authUser: process.env.HTTP_AUTH_USER,
   authPassword: process.env.HTTP_AUTH_PASSWORD,
   fbUserId: process.env.FACEBOOK_USERID,
+  githubAccessToken: process.env.GITHUB_ACCESS_TOKEN,
   // jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
   // mongo: {
   //   uri: process.env.NODE_ENV === 'test'

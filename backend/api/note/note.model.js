@@ -8,6 +8,9 @@ const {
   prepareUpdateQuery,
   renameFile,
 } = require('./note.util');
+const {
+  test
+} = require('lib/gitrest');
 
 const NoteModel = {
   get: async (key) => {
@@ -30,6 +33,7 @@ const NoteModel = {
     }
   },
   list: async (authorized) => {
+    // test();
     const sql = authorized ?
       'SELECT * FROM note LIMIT 10' :
       'SELECT * FROM note WHERE isPublished=1 LIMIT 10';
