@@ -1,0 +1,40 @@
+name: Lint
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    paths:
+      - "budget/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "budget/**"
+    branches:
+      - main
+
+env:
+  project: "budget"
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Node.js dependencies
+        working-directory: ${{ env.project }}
+        run: npm ci
+
+      - name: Run linter
+        working-directory: ${{ env.project }}
+        run: npm run lint
